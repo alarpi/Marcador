@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="flex direction-column max-height">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
@@ -9,15 +9,19 @@
     <link rel="stylesheet" href="css/position.css" />
     <link href="css/marcador.css" rel="stylesheet" type="text/css" />
   </head>
-  <body>
+  <body class="flex direction-column max-height">
     <div id="timer" class="black white-text flex justify-center align-center max-width">20:00:00</div>
-    <div class="main-container flex wrap">
-      <div class="numeros flex justify-center align-center red">0</div>
-      <div class="numeros flex justify-center align-center yellow">0</div>
-      <div class="numeros flex justify-center align-center blue">0</div>
-      <div class="numeros flex justify-center align-center purple">0</div>
-      <div class="numeros flex justify-center align-center green">0</div>
-      <div class="numeros flex justify-center align-center orange">0</div>
+    <div class="main-container flex wrap max-width">
+      <div class="teams flex justify-center align-center red">
+          <div class="left-side"></div>
+          <span class="score">0</span>
+          <div class="right-side"></div>
+      </div>
+      <div class="teams flex justify-center align-center yellow">0</div>
+      <div class="teams flex justify-center align-center blue">0</div>
+      <div class="teams flex justify-center align-center purple">0</div>
+      <div class="teams flex justify-center align-center green">0</div>
+      <div class="teams flex justify-center align-center orange">0</div>
     </div>
   </body>
 </html>

@@ -26,6 +26,14 @@
   background-color: black;
 }
 
+.left-side {
+  background-color: green;
+}
+
+.right-side {
+  background-color: orange;
+}
+
 .white-text {
   color: white;
 }
@@ -34,8 +42,8 @@
   width: 100%;
 }
 
-.max-height{
-    height: 100%;
+.max-height {
+  height: 100%;
 }
 
 #timer {
