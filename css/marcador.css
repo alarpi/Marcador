@@ -1,32 +1,23 @@
-
-* {
-  box-sizing: border-box;
-  /*font-weight: bold;*/
-	font-family: 'Anton', sans-serif;
-}
-html, body {
-  background: #000;
-  margin: 0px;
-  padding: 0px;
+body,
+html {
+  display: flex;
+  flex-direction: column;
+  font-family: "Anton", sans-serif;
   height: 100%;
-  font-style: normal;
-  text-decoration: none;
-  overflow: hidden
 }
+
+.main-container {
+  display: flex;
+  width: 100%;
+  flex: 1;
+}
+
 .numeros {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
   width: 33.33%;
-  height: 43%;
-  float: left;
-  font-size: 330px;
+  height: 50%;
+  font-size: 20.63rem;
 }
-#tiempo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 110px;
-  color: white;
+
+#timer {
+  font-size: 6.88rem;
 }
