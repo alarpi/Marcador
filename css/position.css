@@ -1,19 +1,31 @@
-.flex{
-    display: flex;
+.flex {
+  display: flex;
 }
 
-.direction-column{
-    flex-direction: column;
+.direction-column {
+  flex-direction: column;
 }
 
-.justify-center{
-    justify-content: center;
+.justify-center {
+  justify-content: center;
 }
 
-.align-center{
-    align-items: center;
+.align-center {
+  align-items: center;
 }
 
-.wrap{
-    flex-wrap: wrap;
+.wrap {
+  flex-wrap: wrap;
+}
+
+.main-container {
+  flex-grow: 1;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
 }

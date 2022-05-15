@@ -34,8 +34,16 @@
   background-color: orange;
 }
 
+.invisible {
+  opacity: 0;
+}
+
 .white-text {
   color: white;
+}
+
+.anton {
+  font-family: "Anton", sans-serif;
 }
 
 .max-width {
@@ -48,4 +56,19 @@
 
 #timer {
   height: 14%;
+}
+
+.teams {
+  width: 33.33%;
+  height: 50%;
+  font-size: 16.5rem;
+}
+
+#timer {
+  font-size: 6.88rem;
+}
+
+.left-side,
+.right-side {
+  width: 50%;
 }
