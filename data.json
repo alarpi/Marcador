@@ -2,15 +2,15 @@
   "teams": [
     {
       "color": "red",
-      "score": 0
+      "score": 2
     },
     {
       "color": "yellow",
-      "score": 0
+      "score": 4
     },
     {
       "color": "blue",
-      "score": 0
+      "score": 1
     },
     {
       "color": "purple",
