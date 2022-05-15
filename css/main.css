@@ -1,0 +1,31 @@
+.red {
+  background-color: #fb0004;
+}
+
+.yellow {
+  background-color: #fff000;
+}
+
+.blue {
+  background-color: #0000c1;
+}
+
+.purple {
+  background-color: #6c0372;
+}
+
+.green {
+  background-color: #03740d;
+}
+
+.orange {
+  background-color: #ee7000;
+}
+
+.max-width {
+  width: 100%;
+}
+
+#timer {
+  height: 14%;
+}
