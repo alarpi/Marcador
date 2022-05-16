@@ -92,6 +92,10 @@ function calculateTime() {
   );
 }
 
+function reproduceSound(fileSource) {
+  new Audio(fileSource).play();
+}
+
 // Timer will start. You can save half-one second above onload.
 // You can define here: Hours, minutes and seconds. You will need to reset with Ctrl + E after change values.
 setTimer(0, 0, 20);
@@ -143,12 +147,13 @@ const interval = setInterval(() => {
     parseInt(localStorage.getItem("minutes")) <= 0 &&
     localStorage.getItem("seconds") < 0
   ) {
-    // Stop the timer and download file
+    // Stop the timer, download file and reproduce sound
     clearInterval(interval);
     downloadResults(
       JSON.stringify(JSON.parse(localStorage.getItem("teams")), null, 2),
       "scores.json"
     );
+    reproduceSound("../audio/finish.mp3");
   }
 }, 1000);
 
