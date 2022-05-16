@@ -93,6 +93,7 @@ function calculateTime() {
 }
 
 // Timer will start. You can save half-one second above onload.
+// You can define here: Hours, minutes and seconds. You will need to reset with Ctrl + E after change values.
 setTimer(0, 0, 20);
 
 // Fill default values to empty local data and containers
@@ -113,7 +114,6 @@ window.onload = () => {
     ":" +
     formatNumber(localStorage.getItem("seconds"));
 };
-
 
 // Increase score of selected team
 rightSide.forEach((e, i) => {
