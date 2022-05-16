@@ -21,6 +21,8 @@ leftSide.forEach((e, i) => {
 
 rightSide.forEach((e, i) => {
   e.addEventListener("click", (x) => {
-    scores[i].innerText--;
+    if(scores[i].innerText != 0){
+      scores[i].innerText--;
+    }
   });
 });
