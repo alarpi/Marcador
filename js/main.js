@@ -63,18 +63,15 @@ window.onload = () => {
   if (!localStorage.getItem("timer")) {
     localStorage.setItem("timer", "20:00:00");
   }
+  document.getElementById("timer").innerText =
+    formatNumber(localStorage.getItem("hours")) +
+    ":" +
+    formatNumber(localStorage.getItem("minutes")) +
+    ":" +
+    formatNumber(localStorage.getItem("seconds"));
   if (!localStorage.getItem("teams")) {
     localStorage.setItem("teams", JSON.stringify(jsonScores));
   }
-  if (!localStorage.getItem("hours")) {
-    localStorage.setItem("hours", 20);
-  }
-  document.getElementById("timer").innerText =
-  formatNumber(localStorage.getItem("hours")) +
-  ":" +
-  formatNumber(localStorage.getItem("minutes")) +
-  ":" +
-  formatNumber(localStorage.getItem("seconds"));
   scores.forEach((e, i) => {
     e.innerText = JSON.parse(localStorage.getItem("teams")).teams[i].score;
   });
@@ -99,14 +96,19 @@ leftSide.forEach((e, i) => {
   });
 });
 
-
 function calculateTime() {
   if (localStorage.getItem("seconds") < 0) {
     localStorage.setItem("seconds", 59);
-    localStorage.setItem("minutes", parseInt(localStorage.getItem("minutes"))-1);
+    localStorage.setItem(
+      "minutes",
+      parseInt(localStorage.getItem("minutes")) - 1
+    );
     if (localStorage.getItem("minutes") < 0) {
       localStorage.setItem("minutes", 59);
-       localStorage.setItem("hours", parseInt(localStorage.getItem("hours"))-1);
+      localStorage.setItem(
+        "hours",
+        parseInt(localStorage.getItem("hours")) - 1
+      );
     }
   }
   document.getElementById("timer").innerText =
@@ -115,7 +117,10 @@ function calculateTime() {
     formatNumber(localStorage.getItem("minutes")) +
     ":" +
     formatNumber(localStorage.getItem("seconds"));
-    localStorage.setItem("seconds", parseInt(localStorage.getItem("seconds"))-1);
+  localStorage.setItem(
+    "seconds",
+    parseInt(localStorage.getItem("seconds")) - 1
+  );
 }
 
 const interval = setInterval(() => {
@@ -128,6 +133,3 @@ const interval = setInterval(() => {
     clearInterval(interval);
   }
 }, 1000);
-
-
-
