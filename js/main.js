@@ -31,6 +31,10 @@ let jsonScores = {
   ],
 };
 
+function formatNumber(number) {
+  return number < 10 ? "0" + number : number;
+}
+
 function updateJSON(currentLocalStorage, currentIteration, operator) {
   let currentData = JSON.parse(currentLocalStorage);
   if (operator === "+") {
@@ -43,6 +47,18 @@ function updateJSON(currentLocalStorage, currentIteration, operator) {
   localStorage.setItem("teams", JSON.stringify(currentData));
 }
 
+function setTimer(hours, minutes, seconds) {
+  if (!localStorage.getItem("hours")) {
+    localStorage.setItem("hours", hours);
+  }
+  if (!localStorage.getItem("minutes")) {
+    localStorage.setItem("minutes", minutes);
+  }
+  if (!localStorage.getItem("seconds")) {
+    localStorage.setItem("seconds", seconds);
+  }
+}
+
 window.onload = () => {
   if (!localStorage.getItem("timer")) {
     localStorage.setItem("timer", "20:00:00");
@@ -50,9 +66,19 @@ window.onload = () => {
   if (!localStorage.getItem("teams")) {
     localStorage.setItem("teams", JSON.stringify(jsonScores));
   }
+  if (!localStorage.getItem("hours")) {
+    localStorage.setItem("hours", 20);
+  }
+  document.getElementById("timer").innerText =
+  formatNumber(localStorage.getItem("hours")) +
+  ":" +
+  formatNumber(localStorage.getItem("minutes")) +
+  ":" +
+  formatNumber(localStorage.getItem("seconds"));
   scores.forEach((e, i) => {
     e.innerText = JSON.parse(localStorage.getItem("teams")).teams[i].score;
   });
+  setTimer(20, 0, 0);
 };
 
 rightSide.forEach((e, i) => {
@@ -72,6 +98,36 @@ leftSide.forEach((e, i) => {
     ].score;
   });
 });
+
+
+function calculateTime() {
+  if (localStorage.getItem("seconds") < 0) {
+    localStorage.setItem("seconds", 59);
+    localStorage.setItem("minutes", parseInt(localStorage.getItem("minutes"))-1);
+    if (localStorage.getItem("minutes") < 0) {
+      localStorage.setItem("minutes", 59);
+       localStorage.setItem("hours", parseInt(localStorage.getItem("hours"))-1);
+    }
+  }
+  document.getElementById("timer").innerText =
+    formatNumber(localStorage.getItem("hours")) +
+    ":" +
+    formatNumber(localStorage.getItem("minutes")) +
+    ":" +
+    formatNumber(localStorage.getItem("seconds"));
+    localStorage.setItem("seconds", parseInt(localStorage.getItem("seconds"))-1);
+}
+
+const interval = setInterval(() => {
+  calculateTime();
+  if (
+    localStorage.getItem("hours") === 0 &&
+    localStorage.getItem("minutes") === 0 &&
+    localStorage.getItem("seconds") < 0
+  ) {
+    clearInterval(interval);
+  }
+}, 1000);
 
 
 
