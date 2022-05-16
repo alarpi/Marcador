@@ -75,7 +75,7 @@ window.onload = () => {
   scores.forEach((e, i) => {
     e.innerText = JSON.parse(localStorage.getItem("teams")).teams[i].score;
   });
-  setTimer(20, 0, 0);
+  setTimer(0, 0, 20);
 };
 
 rightSide.forEach((e, i) => {
@@ -117,19 +117,44 @@ function calculateTime() {
     formatNumber(localStorage.getItem("minutes")) +
     ":" +
     formatNumber(localStorage.getItem("seconds"));
+
   localStorage.setItem(
     "seconds",
     parseInt(localStorage.getItem("seconds")) - 1
   );
 }
 
+// The code will repeat each one second until all values are equal to zero
 const interval = setInterval(() => {
   calculateTime();
   if (
-    localStorage.getItem("hours") === 0 &&
-    localStorage.getItem("minutes") === 0 &&
+    parseInt(localStorage.getItem("hours")) === 0 &&
+    parseInt(localStorage.getItem("minutes")) === 0 &&
     localStorage.getItem("seconds") < 0
   ) {
     clearInterval(interval);
+    downloadResults(
+      JSON.stringify(JSON.parse(localStorage.getItem("teams")), null, 2),
+      "scores.json"
+    );
   }
 }, 1000);
+
+// Press Ctrl + E to reset local storage values
+document.addEventListener("keydown", (e) => {
+  if (e.ctrlKey && e.key === "e") {
+    localStorage.clear();
+    window.location.reload();
+  }
+});
+
+// All the contents of local JSON will be displayed in the download's folder
+function downloadResults(localValues, fileName) {
+  let anchor = document.createElement("a");
+  anchor.setAttribute(
+    "href",
+    "data:text/plain;charset=utf-8," + encodeURIComponent(localValues)
+  );
+  anchor.setAttribute("download", fileName);
+  anchor.click();
+}
