@@ -98,13 +98,10 @@ function reproduceSound(fileSource) {
 
 // Timer will start. You can save half-one second above onload.
 // You can define here: Hours, minutes and seconds. You will need to reset with Ctrl + E after change values.
-setTimer(0, 0, 20);
+setTimer(1, 10, 5);
 
 // Fill default values to empty local data and containers
 window.onload = () => {
-  if (!localStorage.getItem("timer")) {
-    localStorage.setItem("timer", "20:00:00");
-  }
   if (!localStorage.getItem("teams")) {
     localStorage.setItem("teams", JSON.stringify(jsonScores));
   }
@@ -147,13 +144,17 @@ const interval = setInterval(() => {
     parseInt(localStorage.getItem("minutes")) <= 0 &&
     localStorage.getItem("seconds") < 0
   ) {
-    // Stop the timer, download file and reproduce sound
+    // Stop the timer, download file, reproduce sound, and refill local data with default values
     clearInterval(interval);
     downloadResults(
       JSON.stringify(JSON.parse(localStorage.getItem("teams")), null, 2),
       "scores.json"
     );
     reproduceSound("../audio/finish.mp3");
+    // This prevent weird values if reset when timer has ended
+    localStorage.setItem("hours", 0);
+    localStorage.setItem("minutes", 0);
+    localStorage.setItem("seconds", 0);
   }
 }, 1000);
 
