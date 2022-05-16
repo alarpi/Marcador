@@ -40,10 +40,12 @@ function updateJSON(currentLocalStorage, currentIteration, operator) {
   if (operator === "+") {
     currentData.teams[currentIteration].score++;
   } else {
+    // Prevents negative numbers in score
     if (currentData.teams[currentIteration].score != 0) {
       currentData.teams[currentIteration].score--;
     }
   }
+  // Upload local storage values
   localStorage.setItem("teams", JSON.stringify(currentData));
 }
 
@@ -58,43 +60,6 @@ function setTimer(hours, minutes, seconds) {
     localStorage.setItem("seconds", seconds);
   }
 }
-
-window.onload = () => {
-  if (!localStorage.getItem("timer")) {
-    localStorage.setItem("timer", "20:00:00");
-  }
-  document.getElementById("timer").innerText =
-    formatNumber(localStorage.getItem("hours")) +
-    ":" +
-    formatNumber(localStorage.getItem("minutes")) +
-    ":" +
-    formatNumber(localStorage.getItem("seconds"));
-  if (!localStorage.getItem("teams")) {
-    localStorage.setItem("teams", JSON.stringify(jsonScores));
-  }
-  scores.forEach((e, i) => {
-    e.innerText = JSON.parse(localStorage.getItem("teams")).teams[i].score;
-  });
-  setTimer(0, 0, 20);
-};
-
-rightSide.forEach((e, i) => {
-  e.addEventListener("click", (x) => {
-    updateJSON(localStorage.getItem("teams"), i, "+");
-    scores[i].innerText = JSON.parse(localStorage.getItem("teams")).teams[
-      i
-    ].score;
-  });
-});
-
-leftSide.forEach((e, i) => {
-  e.addEventListener("click", (x) => {
-    updateJSON(localStorage.getItem("teams"), i, "-");
-    scores[i].innerText = JSON.parse(localStorage.getItem("teams")).teams[
-      i
-    ].score;
-  });
-});
 
 function calculateTime() {
   if (localStorage.getItem("seconds") < 0) {
@@ -111,6 +76,8 @@ function calculateTime() {
       );
     }
   }
+
+  // Refill HTML container
   document.getElementById("timer").innerText =
     formatNumber(localStorage.getItem("hours")) +
     ":" +
@@ -118,20 +85,65 @@ function calculateTime() {
     ":" +
     formatNumber(localStorage.getItem("seconds"));
 
+  // Decrease one second in timer
   localStorage.setItem(
     "seconds",
     parseInt(localStorage.getItem("seconds")) - 1
   );
 }
 
+// Timer will start. You can save half-one second above onload.
+setTimer(0, 0, 20);
+
+// Fill default values to empty local data and containers
+window.onload = () => {
+  if (!localStorage.getItem("timer")) {
+    localStorage.setItem("timer", "20:00:00");
+  }
+  if (!localStorage.getItem("teams")) {
+    localStorage.setItem("teams", JSON.stringify(jsonScores));
+  }
+  scores.forEach((e, i) => {
+    e.innerText = JSON.parse(localStorage.getItem("teams")).teams[i].score;
+  });
+  document.getElementById("timer").innerText =
+    formatNumber(localStorage.getItem("hours")) +
+    ":" +
+    formatNumber(localStorage.getItem("minutes")) +
+    ":" +
+    formatNumber(localStorage.getItem("seconds"));
+};
+
+
+// Increase score of selected team
+rightSide.forEach((e, i) => {
+  e.addEventListener("click", (x) => {
+    updateJSON(localStorage.getItem("teams"), i, "+");
+    scores[i].innerText = JSON.parse(localStorage.getItem("teams")).teams[
+      i
+    ].score;
+  });
+});
+
+// Decrease score of selected team
+leftSide.forEach((e, i) => {
+  e.addEventListener("click", (x) => {
+    updateJSON(localStorage.getItem("teams"), i, "-");
+    scores[i].innerText = JSON.parse(localStorage.getItem("teams")).teams[
+      i
+    ].score;
+  });
+});
+
 // The code will repeat each one second until all values are equal to zero
 const interval = setInterval(() => {
   calculateTime();
   if (
-    parseInt(localStorage.getItem("hours")) === 0 &&
-    parseInt(localStorage.getItem("minutes")) === 0 &&
+    parseInt(localStorage.getItem("hours")) <= 0 &&
+    parseInt(localStorage.getItem("minutes")) <= 0 &&
     localStorage.getItem("seconds") < 0
   ) {
+    // Stop the timer and download file
     clearInterval(interval);
     downloadResults(
       JSON.stringify(JSON.parse(localStorage.getItem("teams")), null, 2),
@@ -140,7 +152,7 @@ const interval = setInterval(() => {
   }
 }, 1000);
 
-// Press Ctrl + E to reset local storage values
+// Press Ctrl + E to reset local storage values and timer
 document.addEventListener("keydown", (e) => {
   if (e.ctrlKey && e.key === "e") {
     localStorage.clear();
