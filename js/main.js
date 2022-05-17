@@ -49,10 +49,7 @@ function updateJSON(currentLocalStorage, currentIteration, operator) {
   localStorage.setItem("teams", JSON.stringify(currentData));
 }
 
-function setTimer(hours, minutes, seconds) {
-  if (!localStorage.getItem("hours")) {
-    localStorage.setItem("hours", hours);
-  }
+function setTimer(minutes, seconds) {
   if (!localStorage.getItem("minutes")) {
     localStorage.setItem("minutes", minutes);
   }
@@ -70,17 +67,11 @@ function calculateTime() {
     );
     if (localStorage.getItem("minutes") < 0) {
       localStorage.setItem("minutes", 59);
-      localStorage.setItem(
-        "hours",
-        parseInt(localStorage.getItem("hours")) - 1
-      );
     }
   }
 
   // Refill HTML container
   document.getElementById("timer").innerText =
-    formatNumber(localStorage.getItem("hours")) +
-    ":" +
     formatNumber(localStorage.getItem("minutes")) +
     ":" +
     formatNumber(localStorage.getItem("seconds"));
@@ -97,8 +88,8 @@ function reproduceSound(fileSource) {
 }
 
 // Timer will start. You can save half-one second above onload.
-// You can define here: Hours, minutes and seconds. You will need to reset with Ctrl + E after change values.
-setTimer(1, 10, 5);
+// You can define here: Minutes and seconds. You will need to reset with Ctrl + E after change values.
+setTimer(20, 0);
 
 // Fill default values to empty local data and containers
 window.onload = () => {
@@ -109,8 +100,6 @@ window.onload = () => {
     e.innerText = JSON.parse(localStorage.getItem("teams")).teams[i].score;
   });
   document.getElementById("timer").innerText =
-    formatNumber(localStorage.getItem("hours")) +
-    ":" +
     formatNumber(localStorage.getItem("minutes")) +
     ":" +
     formatNumber(localStorage.getItem("seconds"));
@@ -140,7 +129,6 @@ leftSide.forEach((e, i) => {
 const interval = setInterval(() => {
   calculateTime();
   if (
-    parseInt(localStorage.getItem("hours")) <= 0 &&
     parseInt(localStorage.getItem("minutes")) <= 0 &&
     localStorage.getItem("seconds") < 0
   ) {
@@ -152,7 +140,6 @@ const interval = setInterval(() => {
     );
     reproduceSound("../audio/finish.mp3");
     // This prevent weird values if reset when timer has ended
-    localStorage.setItem("hours", 0);
     localStorage.setItem("minutes", 0);
     localStorage.setItem("seconds", 0);
   }
