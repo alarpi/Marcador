@@ -8,6 +8,7 @@ import {
 let leftSide = Array.from(document.getElementsByClassName("left-side"));
 let rightSide = Array.from(document.getElementsByClassName("right-side"));
 let scores = Array.from(document.getElementsByClassName("score"));
+let timer;
 let jsonScores = {
   teams: [
     {
