@@ -1,0 +1,100 @@
+.red {
+  background-color: #fb0004;
+}
+
+.yellow {
+  background-color: #fff000;
+}
+
+.blue {
+  background-color: #0000c1;
+}
+
+.purple {
+  background-color: #6c0372;
+}
+
+.green {
+  background-color: #03740d;
+}
+
+.orange {
+  background-color: #ee7000;
+}
+
+.black {
+  background-color: black;
+}
+
+.dark-blue {
+  background-color: #161a37;
+}
+
+.no-border {
+  border: none;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.text-shadow {
+  text-shadow: 1px 1px black;
+}
+
+.invisible {
+  opacity: 0;
+}
+
+.white-text {
+  color: white;
+}
+
+.anton {
+  font-family: "Anton", sans-serif;
+}
+
+.max-width {
+  width: 100%;
+}
+
+.max-height {
+  height: 100%;
+}
+
+.top-container {
+  height: 14%;
+}
+
+#timer {
+  font-size: 10vh;
+}
+
+.submenu {
+  width: 6.5rem;
+  transition: right 0.5s;
+}
+
+.actions {
+  height: 25%;
+  font-size: 2.2vh;
+}
+
+.actions:hover {
+  background-color: #cb1e87;
+}
+
+.main-container {
+  height: 86%;
+}
+
+.teams {
+  width: 33.33%;
+  height: 50%;
+  font-size: 25vh;
+}
+
+.left-side,
+.right-side {
+  width: 50%;
+}

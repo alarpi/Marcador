@@ -1,0 +1,40 @@
+.flex {
+  display: flex;
+}
+
+.direction-column {
+  flex-direction: column;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.main-container {
+  flex-grow: 1;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.submenu{
+  top: 0;
+  right: -5rem;
+}
+
+.submenu:hover {
+  right: 0;
+}

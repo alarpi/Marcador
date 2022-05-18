@@ -1,18 +1,117 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Super Marcador</title>
-<link href="marcador.css" rel="stylesheet" type="text/css">
-</head>
-
-<body>
-<div id="tiempo" style="width: 100%; height: 14%;">20:00:00</div>
-<div class="numeros" style="background-color: #FB0004;">0</div>
-<div class="numeros" style="background-color: #FFF000;">0</div>
-<div class="numeros" style="background-color: #0000C1;">0</div>
-<div class="numeros" style="background-color: #6C0372;">0</div>
-<div class="numeros" style="background-color: #03740D;">0</div>
-<div class="numeros" style="background-color: #EE7000;">0</div>
-</body>
+<!DOCTYPE html>
+<html class="flex direction-column max-height">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <title>Super-marker 🏐🔥</title>
+    <link rel="icon" href="img/sonam.jpg" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/position.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <script type="module" src="js/main.js"></script>
+  </head>
+  <body class="flex direction-column anton max-height">
+    <div
+      class="top-container flex justify-center align-center relative overflow-hidden"
+    >
+      <div
+        id="timer"
+        class="black white-text flex justify-center align-center max-width max-height"
+      >
+        00:00
+      </div>
+      <div
+        class="submenu absolute max-height flex direction-column justify-center align-center"
+      >
+        <button
+          class="actions white-text max-width no-border text-shadow dark-blue"
+          id="fifteen-minutes"
+        >
+          15'
+        </button>
+        <button
+          class="actions white-text max-width no-border text-shadow dark-blue"
+          id="twenty-minutes"
+        >
+          20'
+        </button>
+        <button
+          class="actions white-text max-width no-border text-shadow dark-blue"
+          id="play"
+        >
+          ▶
+        </button>
+        <button
+          class="actions white-text max-width no-border text-shadow dark-blue"
+          id="reset"
+        >
+          🔁
+        </button>
+      </div>
+    </div>
+    <div class="main-container flex wrap max-width">
+      <div class="teams relative flex justify-center align-center red">
+        <div
+          data-value="red"
+          class="change-scores flex absolute max-width max-height invisible"
+        >
+          <div class="left-side max-height"></div>
+          <div class="right-side max-height"></div>
+        </div>
+        <span class="score white-text">0</span>
+      </div>
+      <div class="teams relative flex justify-center align-center yellow">
+        <div
+          data-value="yellow"
+          class="change-scores flex absolute max-width max-height invisible"
+        >
+          <div class="left-side max-height"></div>
+          <div class="right-side max-height"></div>
+        </div>
+        <span class="score">0</span>
+      </div>
+      <div class="teams relative flex justify-center align-center blue">
+        <div
+          data-value="blue"
+          class="change-scores flex absolute max-width max-height invisible"
+        >
+          <div class="left-side max-height"></div>
+          <div class="right-side max-height"></div>
+        </div>
+        <span class="score white-text">0</span>
+      </div>
+      <div class="teams relative flex justify-center align-center purple">
+        <div
+          data-value="purple"
+          class="change-scores flex absolute max-width max-height invisible"
+        >
+          <div class="left-side max-height"></div>
+          <div class="right-side max-height"></div>
+        </div>
+        <span class="score white-text">0</span>
+      </div>
+      <div class="teams relative flex justify-center align-center green">
+        <div
+          data-value="green"
+          class="change-scores flex absolute max-width max-height invisible"
+        >
+          <div class="left-side max-height"></div>
+          <div class="right-side max-height"></div>
+        </div>
+        <span class="score white-text">0</span>
+      </div>
+      <div class="teams relative flex justify-center align-center orange">
+        <div
+          data-value="orange"
+          class="change-scores flex absolute max-width max-height invisible"
+        >
+          <div class="left-side max-height"></div>
+          <div class="right-side max-height"></div>
+        </div>
+        <span class="score white-text">0</span>
+      </div>
+    </div>
+  </body>
 </html>
