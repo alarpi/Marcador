@@ -1,4 +1,9 @@
-import { formatNumber } from "utility.js";
+import {
+  formatNumber,
+  getCurrentTime,
+  downloadResults,
+  reproduceSound,
+} from "./utility.js";
 
 let leftSide = Array.from(document.getElementsByClassName("left-side"));
 let rightSide = Array.from(document.getElementsByClassName("right-side"));
@@ -47,6 +52,7 @@ function updateJSON(currentLocalStorage, currentIteration, operator) {
 }
 
 function startTimer() {
+  // Clean previous timer if were one.
   clearInterval(timer);
   timer = setInterval(() => {
     calculateTime();
@@ -98,38 +104,6 @@ function updateTimer() {
     formatNumber(localStorage.getItem("seconds"));
 }
 
-// All the contents of local JSON will be displayed in the download's folder
-function downloadResults(localValues, fileName) {
-  let anchor = document.createElement("a");
-  anchor.setAttribute(
-    "href",
-    "data:text/plain;charset=utf-8," + encodeURIComponent(localValues)
-  );
-  anchor.setAttribute("download", fileName);
-  anchor.click();
-}
-
-function getCurrentTime() {
-  let date = new Date();
-  return (
-    formatNumber(date.getDate()) +
-    "-" +
-    formatNumber(date.getMonth() + 1) +
-    "-" +
-    date.getFullYear() +
-    "_" +
-    formatNumber(date.getHours()) +
-    "_" +
-    formatNumber(date.getMinutes()) +
-    "_" +
-    formatNumber(date.getSeconds())
-  );
-}
-
-function reproduceSound(fileSource) {
-  new Audio(fileSource).play();
-}
-
 // Fill default values to empty local data and containers
 window.onload = () => {
   if (!localStorage.getItem("teams")) {
@@ -172,17 +146,21 @@ leftSide.forEach((e, i) => {
 
 // The code will repeat each one second until all values are equal to zero
 document.getElementById("play").addEventListener("click", () => {
+  // Activate timer
   localStorage.setItem("timer", true);
   startTimer();
 });
 
+// Set timer to fifteen minutes and stop current timer if were one.
 document.getElementById("fifteen-minutes").addEventListener("click", () => {
-  localStorage.setItem("minutes", 1);
+  localStorage.setItem("minutes", 15);
   localStorage.setItem("seconds", 0);
   localStorage.setItem("timer", false);
+  clearInterval(timer);
   updateTimer();
 });
 
+// Set timer to twenty minutes and stop current timer if were one.
 document.getElementById("twenty-minutes").addEventListener("click", () => {
   localStorage.setItem("minutes", 20);
   localStorage.setItem("seconds", 0);
@@ -191,7 +169,7 @@ document.getElementById("twenty-minutes").addEventListener("click", () => {
   updateTimer();
 });
 
-// Press Ctrl + E to reset local storage values and timer
+// Reset timer and scores
 document.getElementById("reset").addEventListener("click", (e) => {
   localStorage.clear();
   window.location.reload();
