@@ -59,7 +59,7 @@ function startTimer() {
     calculateTime();
     if (
       parseInt(localStorage.getItem("minutes")) <= 0 &&
-      localStorage.getItem("seconds") < 0
+      localStorage.getItem("seconds") <= 0
     ) {
       // Stop the timer, download file, reproduce sound, and refill local data with default values
       clearInterval(timer);
@@ -77,6 +77,12 @@ function startTimer() {
 }
 
 function calculateTime() {
+  // Decrease one second in timer
+  localStorage.setItem(
+    "seconds",
+    parseInt(localStorage.getItem("seconds")) - 1
+  );
+
   if (localStorage.getItem("seconds") < 0) {
     localStorage.setItem("seconds", 59);
     localStorage.setItem(
@@ -90,12 +96,6 @@ function calculateTime() {
 
   // Refill HTML container
   updateTimer();
-
-  // Decrease one second in timer
-  localStorage.setItem(
-    "seconds",
-    parseInt(localStorage.getItem("seconds")) - 1
-  );
 }
 
 function updateTimer() {
