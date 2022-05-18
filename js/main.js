@@ -172,9 +172,7 @@ document.getElementById("twenty-minutes").addEventListener("click", () => {
 });
 
 // Press Ctrl + E to reset local storage values and timer
-document.addEventListener("keydown", (e) => {
-  if (e.ctrlKey && e.key === "e") {
-    localStorage.clear();
-    window.location.reload();
-  }
+document.getElementById("reset").addEventListener("click", (e) => {
+  localStorage.clear();
+  window.location.reload();
 });

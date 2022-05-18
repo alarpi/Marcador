@@ -73,16 +73,34 @@
   width: 50%;
 }
 
-.sub-menu{
-  width: 10rem;
+.top-container{
+  overflow: hidden;
 }
 
 .submenu{
-  width: 6rem;
-  height: 2rem;
+  width: 6.5rem;
+  height: 100%;
   top: 0;
+  right: -5rem;
+  transition-property: right;
+  transition-duration: .5s;
+}
+
+.actions{
+  width: 100%;
+  height: 25%;
+  border: none;
+  font-size: 1.2rem;
+  background-color: #161a37;
+  text-shadow: 1px 1px black;
+}
+
+.actions:hover{
+  background-color: #cb1e87;
+}
+
+.submenu:hover{
   right: 0;
-  background-color: white;
 }
 
 

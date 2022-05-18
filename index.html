@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="flex direction-column max-height">
+<html class="flex direction-column">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/responsive.css" />
     <script type="module" src="js/main.js"></script>
   </head>
-  <body class="flex direction-column max-height anton">
+  <body class="flex direction-column anton">
     <div class="top-container flex justify-center align-center relative">
       <div
         id="timer"
@@ -20,10 +20,11 @@
       >
         00:00
       </div>
-      <div class="submenu absolute max-height flex justify-center align-center">
-        <button class="actions" id="fifteen-minutes">+15</button>
-        <button class="actions" id="twenty-minutes">+20</button>
-        <button class="actions" id="play">Play</button>
+      <div class="submenu absolute max-height flex  direction-column justify-center align-center">
+        <button class="actions white-text" id="fifteen-minutes">15'</button>
+        <button class="actions white-text" id="twenty-minutes">20'</button>
+        <button class="actions white-text" id="play">▶</button>
+        <button class="actions white-text" id="reset">🔁</button>
       </div>
     </div>
     <div class="main-container flex wrap max-width">
