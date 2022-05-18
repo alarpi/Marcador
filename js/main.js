@@ -1,7 +1,7 @@
 let leftSide = Array.from(document.getElementsByClassName("left-side"));
 let rightSide = Array.from(document.getElementsByClassName("right-side"));
 let scores = Array.from(document.getElementsByClassName("score"));
-let timer = document.getElementById("timer");
+let timer;
 let jsonScores = {
   teams: [
     {
@@ -49,13 +49,26 @@ function updateJSON(currentLocalStorage, currentIteration, operator) {
   localStorage.setItem("teams", JSON.stringify(currentData));
 }
 
-function setTimer(minutes, seconds) {
-  if (!localStorage.getItem("minutes")) {
-    localStorage.setItem("minutes", minutes);
-  }
-  if (!localStorage.getItem("seconds")) {
-    localStorage.setItem("seconds", seconds);
-  }
+function startTimer() {
+  clearInterval(timer);
+  timer = setInterval(() => {
+    calculateTime();
+    if (
+      parseInt(localStorage.getItem("minutes")) <= 0 &&
+      localStorage.getItem("seconds") < 0
+    ) {
+      // Stop the timer, download file, reproduce sound, and refill local data with default values
+      clearInterval(timer);
+      downloadResults(
+        JSON.stringify(JSON.parse(localStorage.getItem("teams")), null, 2),
+        "scores.json"
+      );
+      reproduceSound("../audio/finish.mp3");
+      // This prevent weird values if reset when timer has ended
+      localStorage.setItem("minutes", 0);
+      localStorage.setItem("seconds", 0);
+    }
+  }, 1000);
 }
 
 function calculateTime() {
@@ -71,10 +84,7 @@ function calculateTime() {
   }
 
   // Refill HTML container
-  document.getElementById("timer").innerText =
-    formatNumber(localStorage.getItem("minutes")) +
-    ":" +
-    formatNumber(localStorage.getItem("seconds"));
+  updateTimer();
 
   // Decrease one second in timer
   localStorage.setItem(
@@ -83,13 +93,27 @@ function calculateTime() {
   );
 }
 
+function updateTimer() {
+  document.getElementById("timer").innerText =
+    formatNumber(localStorage.getItem("minutes")) +
+    ":" +
+    formatNumber(localStorage.getItem("seconds"));
+}
+
+// All the contents of local JSON will be displayed in the download's folder
+function downloadResults(localValues, fileName) {
+  let anchor = document.createElement("a");
+  anchor.setAttribute(
+    "href",
+    "data:text/plain;charset=utf-8," + encodeURIComponent(localValues)
+  );
+  anchor.setAttribute("download", fileName);
+  anchor.click();
+}
+
 function reproduceSound(fileSource) {
   new Audio(fileSource).play();
 }
-
-// Timer will start. You can save half-one second above onload.
-// You can define here: Minutes and seconds. You will need to reset with Ctrl + E after change values.
-setTimer(20, 0);
 
 // Fill default values to empty local data and containers
 window.onload = () => {
@@ -99,10 +123,13 @@ window.onload = () => {
   scores.forEach((e, i) => {
     e.innerText = JSON.parse(localStorage.getItem("teams")).teams[i].score;
   });
-  document.getElementById("timer").innerText =
-    formatNumber(localStorage.getItem("minutes")) +
-    ":" +
-    formatNumber(localStorage.getItem("seconds"));
+  if (!localStorage.getItem("minutes")) {
+    localStorage.setItem("minutes", 0);
+  }
+  if (!localStorage.getItem("seconds")) {
+    localStorage.setItem("seconds", 0);
+  }
+  updateTimer();
 };
 
 // Increase score of selected team
@@ -126,24 +153,23 @@ leftSide.forEach((e, i) => {
 });
 
 // The code will repeat each one second until all values are equal to zero
-const interval = setInterval(() => {
-  calculateTime();
-  if (
-    parseInt(localStorage.getItem("minutes")) <= 0 &&
-    localStorage.getItem("seconds") < 0
-  ) {
-    // Stop the timer, download file, reproduce sound, and refill local data with default values
-    clearInterval(interval);
-    downloadResults(
-      JSON.stringify(JSON.parse(localStorage.getItem("teams")), null, 2),
-      "scores.json"
-    );
-    reproduceSound("../audio/finish.mp3");
-    // This prevent weird values if reset when timer has ended
-    localStorage.setItem("minutes", 0);
-    localStorage.setItem("seconds", 0);
-  }
-}, 1000);
+document.getElementById("play").addEventListener("click", () => {
+  startTimer();
+});
+
+document.getElementById("fifteen-minutes").addEventListener("click", () => {
+  localStorage.setItem("minutes", 15);
+  localStorage.setItem("seconds", 0);
+  clearInterval(timer);
+  updateTimer();
+});
+
+document.getElementById("twenty-minutes").addEventListener("click", () => {
+  localStorage.setItem("minutes", 20);
+  localStorage.setItem("seconds", 0);
+  clearInterval(timer);
+  updateTimer();
+});
 
 // Press Ctrl + E to reset local storage values and timer
 document.addEventListener("keydown", (e) => {
@@ -152,14 +178,3 @@ document.addEventListener("keydown", (e) => {
     window.location.reload();
   }
 });
-
-// All the contents of local JSON will be displayed in the download's folder
-function downloadResults(localValues, fileName) {
-  let anchor = document.createElement("a");
-  anchor.setAttribute(
-    "href",
-    "data:text/plain;charset=utf-8," + encodeURIComponent(localValues)
-  );
-  anchor.setAttribute("download", fileName);
-  anchor.click();
-}
