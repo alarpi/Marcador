@@ -11,7 +11,7 @@
 }
 
 @media screen and (max-height: 820px) {
-  #timer {
-    height: 8rem;
+  .top-container {
+    height: 7.5rem;
   }
 }
