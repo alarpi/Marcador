@@ -26,10 +26,6 @@
   background-color: black;
 }
 
-.sonam{
-  background-color: #c11c80;
-}
-
 .left-side {
   background-color: green;
 }
@@ -78,5 +74,15 @@
 }
 
 .sub-menu{
-  width: 1rem;
+  width: 10rem;
 }
+
+.submenu{
+  width: 6rem;
+  height: 2rem;
+  top: 0;
+  right: 0;
+  background-color: white;
+}
+
+
