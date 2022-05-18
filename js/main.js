@@ -60,13 +60,13 @@ function startTimer() {
       clearInterval(timer);
       downloadResults(
         JSON.stringify(JSON.parse(localStorage.getItem("teams")), null, 2),
-        "scores.json"
+        getCurrentTime() + ".json"
       );
       reproduceSound("../audio/finish.mp3");
       // This prevent weird values if reset when timer has ended
       localStorage.setItem("minutes", 0);
       localStorage.setItem("seconds", 0);
-      localStorage.setItem("timer", false)
+      localStorage.setItem("timer", false);
     }
   }, 1000);
 }
@@ -111,6 +111,23 @@ function downloadResults(localValues, fileName) {
   anchor.click();
 }
 
+function getCurrentTime() {
+  let date = new Date();
+  return (
+    formatNumber(date.getDate()) +
+    "-" +
+    formatNumber(date.getMonth() + 1) +
+    "-" +
+    date.getFullYear() +
+    "_" +
+    formatNumber(date.getHours()) +
+    "_" +
+    formatNumber(date.getMinutes()) +
+    "_" +
+    formatNumber(date.getSeconds())
+  );
+}
+
 function reproduceSound(fileSource) {
   new Audio(fileSource).play();
 }
@@ -129,7 +146,7 @@ window.onload = () => {
   if (!localStorage.getItem("seconds")) {
     localStorage.setItem("seconds", 0);
   }
-  if(localStorage.getItem("timer") === "true"){
+  if (localStorage.getItem("timer") === "true") {
     startTimer();
   }
   updateTimer();
@@ -162,16 +179,16 @@ document.getElementById("play").addEventListener("click", () => {
 });
 
 document.getElementById("fifteen-minutes").addEventListener("click", () => {
-  localStorage.setItem("minutes", 15);
+  localStorage.setItem("minutes", 1);
   localStorage.setItem("seconds", 0);
-  localStorage.setItem("timer", false)
+  localStorage.setItem("timer", false);
   updateTimer();
 });
 
 document.getElementById("twenty-minutes").addEventListener("click", () => {
   localStorage.setItem("minutes", 20);
   localStorage.setItem("seconds", 0);
-  localStorage.setItem("timer", false)
+  localStorage.setItem("timer", false);
   clearInterval(timer);
   updateTimer();
 });
@@ -181,3 +198,5 @@ document.getElementById("reset").addEventListener("click", (e) => {
   localStorage.clear();
   window.location.reload();
 });
+
+
