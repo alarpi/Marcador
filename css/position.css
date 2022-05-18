@@ -14,12 +14,12 @@
   align-items: center;
 }
 
-.wrap {
-  flex-wrap: wrap;
-}
-
 .main-container {
   flex-grow: 1;
+}
+
+.wrap {
+  flex-wrap: wrap;
 }
 
 .absolute {

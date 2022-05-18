@@ -1,7 +1,6 @@
 let leftSide = Array.from(document.getElementsByClassName("left-side"));
 let rightSide = Array.from(document.getElementsByClassName("right-side"));
 let scores = Array.from(document.getElementsByClassName("score"));
-let timer;
 let jsonScores = {
   teams: [
     {
@@ -67,6 +66,7 @@ function startTimer() {
       // This prevent weird values if reset when timer has ended
       localStorage.setItem("minutes", 0);
       localStorage.setItem("seconds", 0);
+      localStorage.setItem("timer", false)
     }
   }, 1000);
 }
@@ -129,6 +129,9 @@ window.onload = () => {
   if (!localStorage.getItem("seconds")) {
     localStorage.setItem("seconds", 0);
   }
+  if(localStorage.getItem("timer") === "true"){
+    startTimer();
+  }
   updateTimer();
 };
 
@@ -154,19 +157,21 @@ leftSide.forEach((e, i) => {
 
 // The code will repeat each one second until all values are equal to zero
 document.getElementById("play").addEventListener("click", () => {
+  localStorage.setItem("timer", true);
   startTimer();
 });
 
 document.getElementById("fifteen-minutes").addEventListener("click", () => {
   localStorage.setItem("minutes", 15);
   localStorage.setItem("seconds", 0);
-  clearInterval(timer);
+  localStorage.setItem("timer", false)
   updateTimer();
 });
 
 document.getElementById("twenty-minutes").addEventListener("click", () => {
   localStorage.setItem("minutes", 20);
   localStorage.setItem("seconds", 0);
+  localStorage.setItem("timer", false)
   clearInterval(timer);
   updateTimer();
 });
