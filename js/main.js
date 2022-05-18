@@ -1,3 +1,5 @@
+import { formatNumber } from "utility.js";
+
 let leftSide = Array.from(document.getElementsByClassName("left-side"));
 let rightSide = Array.from(document.getElementsByClassName("right-side"));
 let scores = Array.from(document.getElementsByClassName("score"));
@@ -29,10 +31,6 @@ let jsonScores = {
     },
   ],
 };
-
-function formatNumber(number) {
-  return number < 10 ? "0" + number : number;
-}
 
 function updateJSON(currentLocalStorage, currentIteration, operator) {
   let currentData = JSON.parse(currentLocalStorage);
@@ -198,5 +196,3 @@ document.getElementById("reset").addEventListener("click", (e) => {
   localStorage.clear();
   window.location.reload();
 });
-
-
