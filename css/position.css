@@ -29,3 +29,12 @@
 .relative {
   position: relative;
 }
+
+.submenu{
+  top: 0;
+  right: -5rem;
+}
+
+.submenu:hover {
+  right: 0;
+}

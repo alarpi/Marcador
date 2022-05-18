@@ -67,35 +67,31 @@
 }
 
 #timer {
-  font-size: 6.88rem;
+  font-size: 10vh;
 }
 
 .submenu {
   width: 6.5rem;
-  height: 100%;
-  top: 0;
-  right: -5rem;
-  transition-property: right;
-  transition-duration: 0.5s;
+  transition: right 0.5s;
 }
 
 .actions {
   height: 25%;
-  font-size: 1.2rem;
+  font-size: 2.2vh;
 }
 
 .actions:hover {
   background-color: #cb1e87;
 }
 
-.submenu:hover {
-  right: 0;
+.main-container {
+  height: 86%;
 }
 
 .teams {
   width: 33.33%;
   height: 50%;
-  font-size: 15.9rem;
+  font-size: 25vh;
 }
 
 .left-side,

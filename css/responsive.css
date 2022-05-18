@@ -1,13 +1,7 @@
 @media screen and (max-width: 600px) {
   .teams {
-    width: 33.33%;
-    font-size: 9rem;
+    width: 50%;
+    height: 33.33%;
+    font-size: 18vh;
   }
-
-  #timer {
-    font-size: 5rem;
-  }
-}
-
-@media screen and (max-height: 750px) {
 }
