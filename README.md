@@ -1,4 +1,4 @@
-<strong>This is an simple project developed with HTML, CSS and Javascript</strong> to follow the points gained by the different teams participating in the Volleyball cup: "Torneo del Rey". 🏐🔥
+<strong>This is an simple project developed with HTML, CSS and JavaScript</strong> to follow the points gained by the different teams participating in the Volleyball cup: "Torneo del Rey". 🏐🔥
 
 It is composed of different panels for each team, and you can add or decrease the points by pressing on the left or the right of any square. There is also a timer that will indicate the finish of the round that you can initialize by pressing the start button.
 
